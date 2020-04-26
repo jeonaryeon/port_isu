@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>isu E&amp;C</title>
+  
+  <!-- fontawesome 연결 -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+  
+  <!-- css 연결 -->
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/isu_style.css">
+  
+  <!-- js 연결 -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="../js/isu_script.js"></script>
+  
+  <!-- HTML5shiv ie6~8 -->
+  <!--
+    [if lt Ie 9]
+    <script src="js/html5shiv.min.js"></script>
+    <script type="text/javascript">
+     alert("현재 브라우저는 지원하지 않습니다. 최신 브라우저로 업데이트 해주세요!");
+    </script>
+   -->
+   
+  <style>
+    /* -------------------------- #news -------------------------- */
+    /* #n_top */
+    #n_top{width: 80%; margin: 50px auto 20px;}
+    #n_top>p{
+      float: left;
+      margin: 0;
+      font-size: 1.2em;
+      line-height: 35px;
+      text-align: left;
+    }
+    #n_top>p>strong{
+      margin-left: 5px;
+      color: #0090d6;
+      font-weight: 500; font-size: 1.2em;
+    }
+    #n_top>form{float: right;}
+    form p{
+      display: inline; 
+      color: #888;
+      font-size: 1.1em;
+    }
+    form select{
+      width: 90px; height: 35px;
+      margin: 0 10px;
+      font-size: 1em;
+      text-indent: 10px;
+      background-color: #eee;
+      background-image: url(../images/down.png);
+      background-position: 65px 12px;
+      background-repeat: no-repeat;
+      border: 0; border-radius: 0;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+    form input{
+      width: 250px; height: 35px;
+      margin-right: 10px; padding: 0 10px;
+      font-size: 1em;
+      background-color: #eee;
+      border: 0;
+    }
+    form button{
+      width: 60px; height: 35px;
+      color: #eee;
+      font-size: 1em;
+      background-color: #555;
+    }
+    
+    /* #n_main */
+    #n_main{
+      width: 80%;
+      margin: 0 auto;
+    }
+      table{
+        width: 100%; 
+        font-size: 1.2em;
+      }
+      thead>tr{
+        display: block;
+        padding: 10px 20px;
+        border-bottom: 2px solid #999;
+      }
+        th{
+          display: inline-block;
+          color: #888;
+          font-weight: 500;
+        }
+        th:nth-child(1){width: 10%; text-align: left;}
+        th:nth-child(2){width: 55%; text-align: left;}
+        th:nth-child(3){width: 20%;}
+        th:nth-child(4){width: 13%; text-align: right;}
+    
+      tbody>tr{
+        display: block;
+        padding: 15px 20px;
+        border-bottom: 1px solid #eee;
+      }
+        td{
+          display: inline-block;
+          color: #555;
+        }
+        td:nth-child(1){width: 10%;}
+        td:nth-child(2){width: 55%;}
+        td:nth-child(3){width: 20%; text-align: center;}
+        td:nth-child(4){width: 13%; text-align: right;}
+
+      .n_list{
+        position: relative;
+        width: 420px; height: 35px;
+        margin: 50px auto 0;
+        color: #888;
+        line-height: 35px;
+        text-align: center;
+      }
+      .n_list>ul{margin-left: 35px;}
+      .n_list>ul>li{
+        float: left;
+        width: 35px; height: 35px;
+        border: 1px solid #eee; border-right: 0;
+        box-sizing: border-box;
+        cursor: pointer;
+      }
+      .n_list>ul>li.on{
+        color: #0090d6;
+        font-weight: 600;
+        border-color: #0090d6; border-right: 1px solid #0090d6;
+      }
+
+      .n_list>button{
+        position: absolute; top: 0;
+        width: 35px; height: 35px;
+        color: #888;
+        font-size: 1.2em;
+        border: 1px solid #eee;
+        box-sizing: border-box;
+      }
+      .n_list>.n_left{
+        left: 0;
+         border-right: 0;
+      }
+      .n_list>.n_right{right: 0;}
+    
+    /* media query */
+    @media screen and (max-width:1439px){
+      #n_top,#n_main{width: 100%;}
+    }
+    
+    @media screen and (max-width:768px){
+      #n_top>p{line-height: 30px;}
+      form select{
+        width: 75px; height: 30px;
+        background-image: url(../images/down_s.png);
+        background-position: 60px 12px;
+      }
+      form input{width: 150px; height: 30px;}
+      form button{height: 30px;}
+    }    
+    
+    @media screen and (max-width:600px){
+      #n_top{margin-top: 30px;}
+      #n_top>p{
+        float: none; 
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      #n_top>form{
+        float: none;
+        text-align: center;
+      }
+      
+      th:nth-child(1), td:nth-child(1){width: 12%;}
+      th:nth-child(2), td:nth-child(2){width: 86%;}
+      
+      th:nth-child(3), th:nth-child(4),
+      td:nth-child(3), td:nth-child(4){display: none;}
+      
+      .n_list{
+        width: 300px;
+        margin-top: 30px;
+        line-height: 25px;
+      }
+      .n_list>ul{margin-left: 25px;}
+      .n_list>ul>li{width: 25px; height: 25px;}
+      .n_list>button{width: 25px; height: 25px;}
+    }
+  </style>
+  
+  <script>
+    $(function(){
+      var n=$('tbody>tr>.num:first').text();
+      $('#n_top>p>strong').text(n);
+      
+      $('.n_list>ul>li').on('click focus',function(){
+        $(this).addClass('on').siblings().removeClass('on');
+      });
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>
+        <a href="../index.html">
+          <img src="../images/logo.png" alt="이수건설 로고">
+        </a>
+      </h1>
+      <button type="button" class="hamBtn icon">menu image</button>
+      <nav id="gnb_b">
+        <button type="button" class="close icon">close image</button>
+        <ul class="clearfix">
+          <li>
+            <a href="isu_company1.html">회사소개<span class="line"></span></a>
+            <div class="sub">
+              <ul>
+                <li><a href="isu_company1.html">CEO인사말</a></li>
+                <li><a href="isu_company2.html">연혁</a></li>
+                <li><a href="#">VISION</a></li>
+                <li><a href="#">윤리경영</a></li>
+                <li><a href="#">조직도</a></li>
+                <li><a href="#">이수그룹소개</a></li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a href="#">주요사업<span class="line"></span></a>
+            <div class="sub">
+              <ul>
+                <li><a href="#">건축사업</a></li>
+                <li><a href="#">토목사업</a></li>
+                <li><a href="#">플랜트사업</a></li>
+                <li><a href="#">주택사업</a></li>
+                <li><a href="#">조경사업</a></li>
+                <li><a href="#">해외사업</a></li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a href="#">분양<span class="line"></span></a>
+            <div class="sub">
+              <ul>
+                <li><a href="#">분양정보</a></li>
+                <li><a href="#">현장정보</a></li>
+                <li><a href="#">입주안내</a></li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a href="#">채용정보<span class="line"></span></a>
+            <div class="sub">
+              <ul>
+                <li><a href="#">인재상</a></li>
+                <li><a href="#">복리후생</a></li>
+                <li><a href="#">채용정보</a></li>
+                <li><a href="#">인사제도</a></li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a href="isu_promote3.html">홍보센터<span class="line"></span></a>
+            <div class="sub">
+              <ul>
+                <li><a href="#">브라운스톤</a></li>
+                <li><a href="#">홍보영상</a></li>
+                <li><a href="isu_promote3.html">기업뉴스</a></li>
+                <li><a href="#">이수사보</a></li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a href="isu_customer2.html">고객센터<span class="line"></span></a>
+            <div class="sub">
+              <ul>
+                <li><a href="#">A/S</a></li>
+                <li><a href="isu_customer2.html">찾아오시는길</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </nav> <!-- end of nav.gnb_b -->
+    </div>
+    <div class="tnb clearfix">
+      <div class="container">
+        <p>ENGLISH</p>
+        <p>CHINESE</p>
+      </div>
+    </div>
+  </header> <!-- end of header -->
+  <div class="gnb_bBg"></div>
+  
+  <hr />
+  
+  <nav id="gnb_s">
+    <button type="button" class="close icon">close image</button>
+    <ul class="clearfix">
+      <li>
+        <a href="#">
+          회사소개
+          <span class="line"></span><span class="icon down">down arrow</span>
+        </a>
+        <div class="sub">
+          <ul>
+            <li><a href="isu_company1.html">CEO인사말</a></li>
+            <li><a href="isu_company2.html">연혁</a></li>
+            <li><a href="#">VISION</a></li>
+            <li><a href="#">윤리경영</a></li>
+            <li><a href="#">조직도</a></li>
+            <li><a href="#">이수그룹소개</a></li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <a href="#"> 
+          주요사업
+          <span class="line"></span><span class="icon down">down arrow</span>
+        </a>
+        <div class="sub">
+          <ul>
+            <li><a href="#">건축사업</a></li>
+            <li><a href="#">토목사업</a></li>
+            <li><a href="#">플랜트사업</a></li>
+            <li><a href="#">주택사업</a></li>
+            <li><a href="#">조경사업</a></li>
+            <li><a href="#">해외사업</a></li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <a href="#">
+          분양
+          <span class="line"></span><span class="icon down">down arrow</span>
+        </a>
+        <div class="sub">
+          <ul>
+            <li><a href="#">분양정보</a></li>
+            <li><a href="#">현장정보</a></li>
+            <li><a href="#">입주안내</a></li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <a href="#">
+          채용정보
+          <span class="line"></span><span class="icon down">down arrow</span>
+        </a>
+        <div class="sub">
+          <ul>
+            <li><a href="#">인재상</a></li>
+            <li><a href="#">복리후생</a></li>
+            <li><a href="#">채용정보</a></li>
+            <li><a href="#">인사제도</a></li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <a href="#">
+          홍보센터
+          <span class="line"></span><span class="icon down">down arrow</span>
+        </a>
+        <div class="sub">
+          <ul>
+            <li><a href="#">브라운스톤</a></li>
+            <li><a href="#">홍보영상</a></li>
+            <li><a href="isu_promote3.html">기업뉴스</a></li>
+            <li><a href="#">이수사보</a></li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <a href="#">
+          고객센터
+          <span class="line"></span><span class="icon down">down arrow</span>
+        </a>
+        <div class="sub">
+          <ul>
+            <li><a href="#">A/S</a></li>
+            <li><a href="isu_customer2.html">찾아오시는길</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </nav> <!-- end of nav.gnb_s -->
+  <div class="gnb_sBg"></div>
+  
+  <hr />
+  
+  <section id="customer_banner" class="sub_banner">
+    <div class="container">
+      <h2>title</h2>
+      <p>
+        건설은 아름다운 심포니다.
+        건설의 숨은 주역 <strong>이수건설</strong>
+      </p>
+    </div>
+  </section>
+  
+  <hr />
+  
+  <div id="sub_menu">
+    <div class="container">
+      <ul class="clearfix">
+        <li><a href="../index.html" class="icon">home icon</a></li>
+        <li class="tit">
+          <a href="#">홍보센터<i class="fas fa-caret-down"></i></a>
+          <ul class="page">
+            <li><a href="isu_company1.html">회사소개</a></li>
+            <li><a href="#">주요사업</a></li>
+            <li><a href="#">분양</a></li>
+            <li><a href="#">채용정보</a></li>
+            <li><a href="isu_promote3.html">홍보센터</a></li>
+            <li><a href="isu_customer2.html">고객센터</a></li>
+          </ul>
+        </li>
+        <li class="sub_tab">
+          <a href="#">기업뉴스<i class="fas fa-caret-down"></i></a>
+          <ul>
+            <li><a href="#">브라운스톤</a></li>
+            <li><a href="#">홍보영상</a></li>
+            <li><a href="isu_promote3.html">기업뉴스</a></li>
+            <li><a href="#">이수사보</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <hr />
+  
+  <section id="news">
+    <div class="container">
+      <h2>기업뉴스</h2>
+      <div id="n_top" class="clearfix">
+        <p>
+          총 <strong>n</strong> 건의 글이 있습니다.
+        </p>
+        <form action="#" method="post">
+          <fieldset>
+            <legend>검색</legend>
+            <p>검색구분</p>
+            <select name="search_s" id="search_s">
+              <option value="all">전체</option>
+              <option value="title">제목</option>
+              <option value="content">내용</option>
+            </select>
+            <input type="text" id="search" name="search" placeholder="검색어를 입력하세요.">
+            <button>검색</button>
+          </fieldset>
+        </form>
+      </div>
+      
+      <div id="n_main">
+        <table>
+          <caption>기업뉴스</caption>
+          <thead>
+            <tr>
+              <th>번호</th>
+              <th>제목</th>
+              <th>작성일</th>
+              <th>조회수</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="num">218</td>
+              <td>아산 탕정지구 오피스텔 수주</td>
+              <td>2020 . 01 . 09</td>
+              <td>134</td>
+            </tr>
+            <tr>
+              <td class="num">217</td>
+              <td>평택상공회의소 회관 신축공사 수주</td>
+              <td>2020 . 01 . 02</td>
+              <td>92</td>
+            </tr>
+            <tr>
+              <td class="num">216</td>
+              <td>연초댐 안전성 강화사업 건설공사 수주</td>
+              <td>2019 . 12 . 27</td>
+              <td>163</td>
+            </tr>
+            <tr>
+              <td class="num">215</td>
+              <td>전주1산단 행복주택 건설공사 1공구 수주</td>
+              <td>2019 . 12 . 18</td>
+              <td>250</td>
+            </tr>
+            <tr>
+              <td class="num">214</td>
+              <td>이수건설, 2019년 고객품질대상 우수상 수상</td>
+              <td>2019 . 12 . 03</td>
+              <td>123</td>
+            </tr>
+            <tr>
+              <td class="num">213</td>
+              <td>부천원종 LH참여형 가로주택정비사업</td>
+              <td>2019 . 11 . 22</td>
+              <td>215</td>
+            </tr>
+            <tr>
+              <td class="num">212</td>
+              <td>서울개포 상록아파트 전기공사 수주</td>
+              <td>2019 . 11 . 08</td>
+              <td>174</td>
+            </tr>
+            <tr>
+              <td class="num">211</td>
+              <td>경산무학 A6BL 민간참여 공공주택 수주</td>
+              <td>2019 . 11 . 08</td>
+              <td>219</td>
+            </tr>
+            <tr>
+              <td class="num">210</td>
+              <td>평택고덕 지식산업센터 신축공사 수주</td>
+              <td>2019 . 11 . 07</td>
+              <td>181</td>
+            </tr>
+            <tr>
+              <td class="num">209</td>
+              <td>청평댐 종합 보수보강 공사 시공평가 결과 알림</td>
+              <td>2019 . 10 . 29</td>
+              <td>138</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <div class="n_list">
+          <ul class="clearfix">
+            <li class="on">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+            <li>9</li>
+            <li>10</li>
+          </ul>
+          <button class="n_left">&lang;</button>
+          <button class="n_right">&rang;</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <hr />
+  
+  <footer>
+    <div id="fnb">
+      <div class="container">
+        <ul class="clearfix">
+          <li><a href="isu_company1.html">회사소개</a></li>
+          <li><a href="#">채용정보</a></li>
+          <li><a href="isu_promote3.html">기업뉴스</a></li>
+          <li><a href="#">A/S정보</a></li>
+          <li class="company">
+            <a href="#" class="allMenu">이수계열사 전체보기<span class="icon">plus</span></a>
+            <div class="company_li">
+              <div>
+                <h2>이수계열사</h2>
+                <ul class="clearfix">
+                  <li>
+                    <a href="#"><span><img src="../images/allMenu_bg01.png" alt="(주) 이수"></span>(주) 이수</a>
+                  </li>
+                  <li>
+                    <a href="#"><span><img src="../images/allMenu_bg02.png" alt="이수화학"></span>이수화학</a>
+                  </li>
+                  <li>
+                    <a href="#"><span><img src="../images/allMenu_bg03.png" alt="이수페타시스"></span>이수페타시스</a>
+                  </li>
+                  <li>
+                    <a href="#"><span><img src="../images/allMenu_bg04.png" alt="이수건설"></span>이수건설</a>
+                  </li>
+                  <li>
+                    <a href="#"><span><img src="../images/allMenu_bg05.png" alt="이수시스템"></span>이수시스템</a>
+                  </li>
+                  <li>
+                    <a href="#"><span><img src="../images/allMenu_bg06.png" alt="이수창업투자"></span>이수창업투자</a>
+                  </li>
+                  <li>
+                    <a href="#"><span><img src="../images/allMenu_bg07.png" alt="이수앱지스"></span>이수앱지스</a>
+                  </li>
+                  <li>
+                    <a href="#"><span><img src="../images/allMenu_bg08.png" alt="이수엑사켐"></span>이수엑사켐</a>
+                  </li>
+                  <li>
+                    <a href="#"><span><img src="../images/allMenu_bg09.png" alt="이수엑사보드"></span>이수엑사보드</a>
+                  </li>
+                  <li>
+                    <a href="#"><span><img src="../images/allMenu_bg10.png" alt="이수 C&E"></span>이수 C&amp;E</a>
+                  </li>
+                  <li>
+                    <a href="#"><span><img src="../images/allMenu_bg11.png" alt="토다이수"></span>토다이수</a>
+                  </li>
+                  <li>
+                    <a href="#"><span><img src="../images/allMenu_bg12.png" alt="이수AMC"></span>이수AMC</a>
+                  </li>
+                </ul>
+                <button class="icon close2">close</button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer_main">
+      <div class="container">
+        <h2><a href="#"><img src="../images/footer_logo.png" alt="footer logo"></a></h2>
+        <div class="cont">
+          <p>
+            <a href="#">TEL : 02)590-6500</a>
+            사업자등록번호 : 206-81-40254
+            <span>대표이사 : 제민호</span>
+            <span>서울특별시 서초구 사평대로 84 (반포동)</span>
+          </p>
+          <address>
+            개인 포트폴리오로 해당 기업과는 관련없음을 알려드립니다.
+          </address>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
